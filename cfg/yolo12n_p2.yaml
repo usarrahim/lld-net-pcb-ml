@@ -1,0 +1,55 @@
+# YOLOv12n with P2 (stride-4) detection head for tiny PCB defects.
+# 640x640 input -> P2 feature map is 160x160, P3=80, P4=40, P5=20.
+# Reference architecture: ultralytics yolo12.yaml (extended with an extra P2 branch).
+
+nc: 6  # PCB defect classes
+
+# Standard YOLOv12 width/depth scales
+scales:
+  n: [0.50, 0.25, 1024]
+  s: [0.50, 0.50, 1024]
+  m: [0.50, 1.00, 512]
+  l: [1.00, 1.00, 512]
+  x: [1.00, 1.50, 512]
+
+# Backbone (identical to yolov12)
+backbone:
+  - [-1, 1, Conv,  [64, 3, 2]]            # 0  P1/2
+  - [-1, 1, Conv,  [128, 3, 2]]           # 1  P2/4
+  - [-1, 2, C3k2,  [256, false, 0.25]]    # 2  P2 features
+  - [-1, 1, Conv,  [256, 3, 2]]           # 3  P3/8
+  - [-1, 2, C3k2,  [512, false, 0.25]]    # 4  P3 features
+  - [-1, 1, Conv,  [512, 3, 2]]           # 5  P4/16
+  - [-1, 4, A2C2f, [512, true, 4]]        # 6  P4 features
+  - [-1, 1, Conv,  [1024, 3, 2]]          # 7  P5/32
+  - [-1, 4, A2C2f, [1024, true, 1]]       # 8  P5 features
+
+# Head with extra P2 branch
+head:
+  # ---- Top-down (P5 -> P4 -> P3 -> P2) ----
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]   # 9   P5 -> P4 size
+  - [[-1, 6], 1, Concat, [1]]                    # 10  cat backbone P4
+  - [-1, 2, A2C2f, [512, false, -1]]             # 11  P4 td
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]   # 12  P4 -> P3 size
+  - [[-1, 4], 1, Concat, [1]]                    # 13  cat backbone P3
+  - [-1, 2, A2C2f, [256, false, -1]]             # 14  P3 td
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]   # 15  P3 -> P2 size
+  - [[-1, 2], 1, Concat, [1]]                    # 16  cat backbone P2
+  - [-1, 2, C3k2, [128, false, 0.25]]            # 17  P2/4  -- new tiny head (C3k2 used because nano-scale channel count is below A2C2f's multiple-of-32 constraint)
+
+  # ---- Bottom-up (P2 -> P3 -> P4 -> P5) ----
+  - [-1, 1, Conv, [128, 3, 2]]                   # 18  P2 -> P3 size
+  - [[-1, 14], 1, Concat, [1]]                   # 19  cat P3 td
+  - [-1, 2, A2C2f, [256, false, -1]]             # 20  P3/8
+
+  - [-1, 1, Conv, [256, 3, 2]]                   # 21  P3 -> P4 size
+  - [[-1, 11], 1, Concat, [1]]                   # 22  cat P4 td
+  - [-1, 2, A2C2f, [512, false, -1]]             # 23  P4/16
+
+  - [-1, 1, Conv, [512, 3, 2]]                   # 24  P4 -> P5 size
+  - [[-1, 8], 1, Concat, [1]]                    # 25  cat backbone P5
+  - [-1, 2, C3k2, [1024, true]]                  # 26  P5/32
+
+  - [[17, 20, 23, 26], 1, Detect, [nc]]          # 27  Detect(P2, P3, P4, P5)

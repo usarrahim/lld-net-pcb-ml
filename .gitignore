@@ -1,0 +1,54 @@
+VOC_PCB/
+PCB_DATA_YOLO/
+PCB_DATA_LOCAL/
+PCB_DATA_NOISE/
+PCB_DATA_YOLO_NOISE/
+*.zip
+*.tar
+*.tar.gz
+
+# Report build artifacts (kept local; do not commit)
+*.pdf
+REPORT.pdf
+REPORT.html
+REPORT_DRAFT.md
+build_report_pdf.py
+report_outputs/**/*.tex
+
+runs_pcb/**/weights/epoch*.pt
+runs_pcb/**/weights/*epoch*.pt
+runs/
+
+runs_pcb_local/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+*.onnx.tmp
+*.engine
+*.mlmodel
+
+ödev belgeleri/
+

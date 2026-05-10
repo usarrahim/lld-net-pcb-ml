@@ -1,0 +1,4 @@
+split,images,boxes,class_missing_hole,class_mouse_bite,class_open_circuit,class_short,class_spur,class_spurious_copper
+train,5120,10306,1694,1725,1678,1657,1728,1824
+val,3414,7009,1179,1156,1210,1145,1143,1176
+test,2134,4349,739,803,660,706,765,676
