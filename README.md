@@ -1,15 +1,11 @@
 # lld-net-pcb-ml — LLD-Net PCB experiments
 
 <p align="center">
-  <img src="docs/images/missing_hole.jpg" width="15%" alt="missing_hole" />
-  <img src="docs/images/mouse_bite.jpg" width="15%" alt="mouse_bite" />
-  <img src="docs/images/open_circuit.jpg" width="15%" alt="open_circuit" />
-  <img src="docs/images/short.jpg" width="15%" alt="short" />
-  <img src="docs/images/spur.jpg" width="15%" alt="spur" />
-  <img src="docs/images/spurious_copper.jpg" width="15%" alt="spurious_copper" />
+  <img src="docs/images/pcb_missing_hole.png" width="98%" alt="missing_hole defects with bounding boxes" /><br/>
+  <img src="docs/images/pcb_mouse_bite.png" width="98%" alt="mouse_bite defect with bounding box" />
 </p>
 
-<p align="center"><sub>PKU-Market-PCB samples — six defect classes at 600×600 (see §3).</sub></p>
+<p align="center"><sub>PKU-Market-PCB (600×600 crops) — red boxes = ground truth, labels show class and score.</sub></p>
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-lld--net--pcb--ml-181717?logo=github)](https://github.com/usarrahim/lld-net-pcb-ml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
