@@ -4,7 +4,7 @@
 YOLOv12n + a stride-4 **P2** head so defects a few pixels wide stay spatially resolved under sensor noise.
 
 <p align="center">
-  <img src="docs/images/pcb_missing_hole.png" width="82%" alt="LLD-Net detections of missing_hole defects on a PCB crop" />
+  <img src="docs/images/pcb_missing_hole.png" width="52%" alt="LLD-Net detections of missing_hole defects on a PCB crop" />
 </p>
 <p align="center"><sub>P2 detections on a PKU-Market-PCB 600×600 crop — <code>missing_hole</code> with confidence.</sub></p>
 
