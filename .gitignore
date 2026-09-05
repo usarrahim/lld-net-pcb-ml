@@ -1,13 +1,27 @@
+# Datasets (download separately — see README)
 VOC_PCB/
 PCB_DATA_YOLO/
 PCB_DATA_LOCAL/
 PCB_DATA_NOISE/
 PCB_DATA_YOLO_NOISE/
+PCB_DATA_ILLUM/
 *.zip
 *.tar
 *.tar.gz
 
-# Report build artifacts (kept local; do not commit)
+# Full-split inference dumps (thousands of images)
+runs_pcb/**_predict/
+runs_pcb/**/*_predict/
+runs_pcb/infer/
+
+# Intermediate checkpoints — best.pt is kept
+runs_pcb/**/weights/last.pt
+runs_pcb/**/weights/epoch*.pt
+runs_pcb/**/weights/*epoch*.pt
+runs_pcb_local/
+runs/
+
+# Local report builds
 *.pdf
 REPORT.pdf
 REPORT.html
@@ -15,13 +29,7 @@ REPORT_DRAFT.md
 build_report_pdf.py
 report_outputs/**/*.tex
 
-runs_pcb/**/weights/epoch*.pt
-runs_pcb/**/weights/*epoch*.pt
-runs/
-
-runs_pcb_local/
-
-# ---- Python ----
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -35,20 +43,18 @@ env/
 .mypy_cache/
 .ruff_cache/
 
-# ---- Jupyter ----
+# Jupyter
 .ipynb_checkpoints/
 *-checkpoint.ipynb
 
+# Editors / OS
 .vscode/
 .idea/
-
 .DS_Store
 Thumbs.db
 desktop.ini
 
+# Export scratch
 *.onnx.tmp
 *.engine
 *.mlmodel
-
-ödev belgeleri/
-

@@ -8,9 +8,9 @@
     20,
     30
   ],
-  "baseline_weights": "/content/drive/MyDrive/lld-net-pcb-ml/runs_pcb/yolo12_pcb_baseline/weights/best.pt",
-  "p2_cfg": "/content/drive/MyDrive/lld-net-pcb-ml/cfg/yolo12n_p2.yaml",
-  "p2_best": "/content/runs_pcb_local/yolo12n_p2_strong/weights/best.pt",
+  "baseline_weights": "runs_pcb/yolo12_pcb_baseline/weights/best.pt",
+  "p2_cfg": "cfg/yolo12n_p2.yaml",
+  "p2_best": "runs_pcb/yolo12n_p2_strong/weights/best.pt",
   "baseline_fps": 90.65455779009112,
   "p2_fps": 92.23996795366256,
   "rows": [
